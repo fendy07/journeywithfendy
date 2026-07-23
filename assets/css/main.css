@@ -139,7 +139,12 @@ table {
 
 body {
 	-webkit-text-size-adjust: 100%;
-	text-size-adjust: 100%;
+}
+
+@supports (text-size-adjust: 100%) {
+	body {
+		text-size-adjust: 100%;
+	}
 }
 
 mark {
