@@ -117,6 +117,19 @@
 							<a href="https://drive.usercontent.google.com/u/0/uc?id=1jAIxRt1JnYxdqvI6h06XMRCQc5bjRCCU&export=download" class="button icon solid fa-download" target="_blank" rel="noopener">Download Full Resume (ID)</a>
 						</div>
 
+						<section class="resume-card resume-preview-card">
+							<div class="resume-language-switcher" role="tablist" aria-label="Choose resume language">
+								<button type="button" class="button primary small resume-language-option is-active" data-lang="en" data-preview="https://drive.google.com/file/d/1Vj0UxV9CQ48tnf6OTcesgK30z9vD2tXD/preview" data-open="https://drive.google.com/file/d/1Vj0UxV9CQ48tnf6OTcesgK30z9vD2tXD/view" aria-pressed="true">English</button>
+								<button type="button" class="button small resume-language-option" data-lang="id" data-preview="https://drive.google.com/file/d/1jAIxRt1JnYxdqvI6h06XMRCQc5bjRCCU/preview" data-open="https://drive.google.com/file/d/1jAIxRt1JnYxdqvI6h06XMRCQc5bjRCCU/view" aria-pressed="false">Indonesia</button>
+							</div>
+							<div class="resume-preview-frame">
+								<iframe id="resume-preview-iframe" src="https://drive.google.com/file/d/1Vj0UxV9CQ48tnf6OTcesgK30z9vD2tXD/preview" title="Resume preview" loading="lazy"></iframe>
+							</div>
+							<div class="resume-preview-actions">
+								<a id="resume-open-link" href="https://drive.google.com/file/d/1Vj0UxV9CQ48tnf6OTcesgK30z9vD2tXD/view" class="button small icon solid fa-external-link-alt" target="_blank" rel="noopener">Open Resume in New Tab</a>
+							</div>
+						</section>
+
 						<div class="resume-grid">
 							<section class="resume-card">
 								<h3 class="minor">Skills</h3>
@@ -909,6 +922,30 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 					mobile_assistant_desc.insertAdjacentHTML('afterend','<div id="mobile_assistant_desc"><i>Meet his personal AI assistant in your desktop browser :)</i></div')
 				} else {
 					document.getElementById("say_hi").style.display = 'none';
+				}
+
+				var resumeLanguageButtons = document.querySelectorAll('.resume-language-option');
+				var resumePreviewIframe = document.getElementById('resume-preview-iframe');
+				var resumeOpenLink = document.getElementById('resume-open-link');
+
+				if (resumeLanguageButtons.length && resumePreviewIframe && resumeOpenLink) {
+					resumeLanguageButtons.forEach(function (button) {
+						button.addEventListener('click', function () {
+							var previewUrl = button.getAttribute('data-preview');
+							var openUrl = button.getAttribute('data-open');
+
+							resumePreviewIframe.setAttribute('src', previewUrl);
+							resumeOpenLink.setAttribute('href', openUrl);
+
+							resumeLanguageButtons.forEach(function (item) {
+								item.classList.remove('primary', 'is-active');
+								item.setAttribute('aria-pressed', 'false');
+							});
+
+							button.classList.add('primary', 'is-active');
+							button.setAttribute('aria-pressed', 'true');
+						});
+					});
 				}
 			</script>
 
