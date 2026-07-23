@@ -151,11 +151,11 @@
 							data-preview="https://drive.google.com/file/d/1Vj0UxV9CQ48tnf6OTcesgK30z9vD2tXD/preview"
 							data-open="https://drive.google.com/file/d/1Vj0UxV9CQ48tnf6OTcesgK30z9vD2tXD/view"
 							aria-pressed="true">English</button>
-						<button type="button" class="button primary small resume-language-option is-active"
+						<button type="button" class="button small resume-language-option"
 							data-lang="id"
 							data-preview="https://drive.google.com/file/d/1jAIxRt1JnYxdqvI6h06XMRCQc5bjRCCU/preview"
 							data-open="https://drive.google.com/file/d/1jAIxRt1JnYxdqvI6h06XMRCQc5bjRCCU/view"
-							aria-pressed="true">Indonesia</button>
+							aria-pressed="false">Indonesia</button>
 					</div>
 					<div class="resume-preview-frame">
 						<iframe id="resume-preview-iframe"
@@ -984,7 +984,7 @@
 							meaning. The expected impact is the revitalization of the Komering script through AI-based
 							technology.</p>
 						<div class="card-actions">
-							<a href="" class="button" target="_blank" rel="noopener">Repository</a>
+							<a href="https://github.com/fendy07" class="button" target="_blank" rel="noopener">Repository</a>
 						</div>
 					</section>
 
@@ -996,7 +996,7 @@
 							framework with the
 							Flask for deployment.</p>
 						<div class="card-actions">
-							<a href="" class="button" target="_blank" rel="noopener">Repository</a>
+							<a href="https://github.com/fendy07" class="button" target="_blank" rel="noopener">Repository</a>
 						</div>
 					</section>
 
@@ -1063,7 +1063,7 @@
 						<div class="card-actions">
 							<a href="https://github.com/fendy07/chatbot-AI" class="button" target="_blank"
 								rel="noopener">Repository</a>
-							<a href="" class="button" target="_blank" rel="noopener">Demo Apps</a>
+							<a href="https://github.com/fendy07/chatbot-AI" class="button" target="_blank" rel="noopener">Demo Apps</a>
 						</div>
 					</section>
 
@@ -1620,18 +1620,26 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.4/mobile-detect.min.js"></script>
 	<script>
-		var md = new MobileDetect(window.navigator.userAgent);
-		console.log(md.mobile())
-		if (md.mobile() != null) {
-			document.getElementById("myInput").style.display = 'none';
-			document.getElementById("first_assistant_desc").style.display = 'none';
-			document.getElementById("output").style.display = 'none';
-			document.getElementById("loading_dots").style.display = 'none';
+		if (typeof MobileDetect !== 'undefined') {
+			var md = new MobileDetect(window.navigator.userAgent);
+			if (md.mobile() != null) {
+				var myInput = document.getElementById("myInput");
+				var firstAssistantDesc = document.getElementById("first_assistant_desc");
+				var output = document.getElementById("output");
+				var loadingDots = document.getElementById("loading_dots");
 
-			var mobile_assistant_desc = document.getElementById("output")
-			mobile_assistant_desc.insertAdjacentHTML('afterend', '<div id="mobile_assistant_desc"><i>Meet his personal AI assistant in your desktop browser :)</i></div')
-		} else {
-			document.getElementById("say_hi").style.display = 'none';
+				if (myInput) myInput.style.display = 'none';
+				if (firstAssistantDesc) firstAssistantDesc.style.display = 'none';
+				if (output) output.style.display = 'none';
+				if (loadingDots) loadingDots.style.display = 'none';
+
+				if (output) {
+					output.insertAdjacentHTML('afterend', '<div id="mobile_assistant_desc"><i>Meet his personal AI assistant in your desktop browser :)</i></div>');
+				}
+			} else {
+				var sayHi = document.getElementById("say_hi");
+				if (sayHi) sayHi.style.display = 'none';
+			}
 		}
 
 		var resumeLanguageButtons = document.querySelectorAll('.resume-language-option');
@@ -1670,41 +1678,43 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 					}
 				});
 			});
-			// Dynamic Projects Expand/Collapse
-			var projectCards = document.querySelectorAll('.project-card');
-			projectCards.forEach(function (card) {
-				var textEl = card.querySelector('.project-text');
-				var listEl = card.querySelector('ul');
-				if (textEl) {
-					var textContent = textEl.textContent.trim();
-					if (textContent.length > 500 || listEl) {
-						if (listEl) {
-							listEl.classList.add('project-details-list');
-						}
-						var btn = document.createElement('button');
-						btn.type = 'button';
-						btn.className = 'toggle-text-btn';
-						btn.innerHTML = 'Read more <i class="fas fa-chevron-down" style="font-size:0.75em; margin-left:3px;"></i>';
+		}
 
-						var actions = card.querySelector('.card-actions');
-						if (actions) {
-							card.insertBefore(btn, actions);
-						} else {
-							card.appendChild(btn);
-						}
-
-						btn.addEventListener('click', function (e) {
-							e.preventDefault();
-							card.classList.toggle('expanded');
-							if (card.classList.contains('expanded')) {
-								btn.innerHTML = 'Show less <i class="fas fa-chevron-up" style="font-size:0.75em; margin-left:3px;"></i>';
-							} else {
-								btn.innerHTML = 'Read more <i class="fas fa-chevron-down" style="font-size:0.75em; margin-left:3px;"></i>';
-							}
-						});
+		// Dynamic Projects Expand/Collapse
+		var projectCards = document.querySelectorAll('.project-card');
+		projectCards.forEach(function (card) {
+			var textEl = card.querySelector('.project-text');
+			var listEl = card.querySelector('ul');
+			if (textEl) {
+				var textContent = textEl.textContent.trim();
+				if (textContent.length > 200 || listEl) {
+					if (listEl) {
+						listEl.classList.add('project-details-list');
 					}
+					var btn = document.createElement('button');
+					btn.type = 'button';
+					btn.className = 'toggle-text-btn';
+					btn.innerHTML = 'Read more <i class="fas fa-chevron-down" style="font-size:0.75em; margin-left:3px;"></i>';
+
+					var actions = card.querySelector('.card-actions');
+					if (actions) {
+						card.insertBefore(btn, actions);
+					} else {
+						card.appendChild(btn);
+					}
+
+					btn.addEventListener('click', function (e) {
+						e.preventDefault();
+						card.classList.toggle('expanded');
+						if (card.classList.contains('expanded')) {
+							btn.innerHTML = 'Show less <i class="fas fa-chevron-up" style="font-size:0.75em; margin-left:3px;"></i>';
+						} else {
+							btn.innerHTML = 'Read more <i class="fas fa-chevron-down" style="font-size:0.75em; margin-left:3px;"></i>';
+						}
+					});
 				}
-			});
+			}
+		});
 	</script>
 
 </body>
