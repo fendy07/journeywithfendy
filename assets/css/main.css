@@ -1842,6 +1842,36 @@ input, select, textarea {
 		margin-bottom: 2rem;
 	}
 
+	.resume-preview-card {
+		margin-bottom: 2rem;
+	}
+
+	.resume-language-switcher {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-bottom: 1rem;
+	}
+
+	.resume-preview-frame {
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		overflow: hidden;
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.resume-preview-frame iframe {
+		display: block;
+		width: 100%;
+		height: 70vh;
+		min-height: 28rem;
+		border: 0;
+	}
+
+	.resume-preview-actions {
+		margin-top: 1rem;
+	}
+
 	.resume-grid {
 		display: grid;
 		gap: 1.75rem;
