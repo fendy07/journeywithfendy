@@ -40,10 +40,10 @@ test('TDD 1: Only English button should be active on initial page load', () => {
   assert.ok(idBtn, 'Indonesia button should exist');
 
   assert.strictEqual(enBtn.classList.contains('is-active'), true, 'EN button should have is-active');
-  assert.strictEqual(enBtn.getAttribute('aria-pressed'), 'true', 'EN button aria-pressed should be true');
+  assert.strictEqual(enBtn.getAttribute('aria-selected'), 'true', 'EN button aria-selected should be true');
 
   assert.strictEqual(idBtn.classList.contains('is-active'), false, 'ID button should NOT have is-active initially');
-  assert.strictEqual(idBtn.getAttribute('aria-pressed'), 'false', 'ID button aria-pressed should be false initially');
+  assert.strictEqual(idBtn.getAttribute('aria-selected'), 'false', 'ID button aria-selected should be false initially');
 });
 
 test('TDD 2: Clicking Indonesia language button toggles grid visibility and attributes', () => {
@@ -58,7 +58,7 @@ test('TDD 2: Clicking Indonesia language button toggles grid visibility and attr
   idBtn.click();
 
   assert.strictEqual(idBtn.classList.contains('is-active'), true, 'ID button should be active');
-  assert.strictEqual(idBtn.getAttribute('aria-pressed'), 'true', 'ID button aria-pressed should be true');
+  assert.strictEqual(idBtn.getAttribute('aria-selected'), 'true', 'ID button aria-selected should be true');
   assert.strictEqual(enBtn.classList.contains('is-active'), false, 'EN button should be inactive');
 
   assert.strictEqual(gridEn.style.display, 'none', 'EN grid should be hidden when ID is selected');
