@@ -1500,19 +1500,43 @@ body.is-preload #bg:before {
 	background-color: rgba(255, 255, 255, 0.175);
 }
 
-#header nav.use-middle:after {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	left: calc(50% - 1px);
-	width: 1px;
-	height: 100%;
-	background: #ffffff;
+#header nav:before {
+	display: none;
+}
+
+#header nav {
+	width: 100%;
 }
 
 #header nav.use-middle ul li.is-middle {
+	position: relative;
 	border-left: 0;
+}
+
+#header nav.use-middle ul li {
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+#header nav.use-middle ul li a {
+	width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+	padding: 0 0.4rem;
+	font-size: 0.75rem;
+	letter-spacing: 0.08rem;
+}
+
+#header nav.use-middle ul li.is-middle:before {
+	content: '';
+	position: absolute;
+	z-index: 1;
+	top: calc(-3.5rem - 2px);
+	left: 0;
+	width: 1px;
+	height: calc(3.5rem + 2px + 100%);
+	background: #ffffff;
+	pointer-events: none;
 }
 
 body.is-article-visible #header {
@@ -1582,6 +1606,54 @@ body.is-preload #header .content .inner {
 		line-height: 1.875;
 	}
 
+	#header nav {
+		width: 100%;
+	}
+
+	#header nav.use-middle ul li.is-middle:before {
+		top: calc(-2rem - 2px);
+		height: calc(2rem + 2px + 100%);
+	}
+
+}
+
+@media screen and (min-width: 541px) and (max-width: 736px) {
+
+	#header nav.use-middle ul {
+		width: 100%;
+	}
+
+	#header nav.use-middle ul li a {
+		padding: 0 0.25rem;
+		font-size: 0.58rem;
+		letter-spacing: 0.04rem;
+		white-space: nowrap;
+	}
+
+}
+
+@media screen and (max-width: 540px) {
+
+	#header nav ul {
+		-moz-flex-direction: column;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+
+	#header nav ul li {
+		border-left: 0;
+		border-top: solid 1px #ffffff;
+	}
+
+	#header nav ul li:first-child {
+		border-top: 0;
+	}
+
+	#header nav.use-middle ul li.is-middle:before {
+		display: none;
+	}
+
 }
 
 @media screen and (max-width: 480px) {
@@ -1595,21 +1667,8 @@ body.is-preload #header .content .inner {
 	}
 
 	#header nav ul {
-		-moz-flex-direction: column;
-		-webkit-flex-direction: column;
-		-ms-flex-direction: column;
-		flex-direction: column;
 		min-width: 10rem;
 		max-width: 100%;
-	}
-
-	#header nav ul li {
-		border-left: 0;
-		border-top: solid 1px #ffffff;
-	}
-
-	#header nav ul li:first-child {
-		border-top: 0;
 	}
 
 	#header nav ul li a {
@@ -1617,10 +1676,6 @@ body.is-preload #header .content .inner {
 		line-height: 3rem;
 		min-width: 0;
 		width: 100%;
-	}
-
-	#header nav.use-middle:after {
-		display: none;
 	}
 
 }
